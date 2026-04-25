@@ -14,21 +14,26 @@ Aby uruchomić grę, potrzebujesz zainstalowanego [Pythona](https://www.python.o
 
 
 Opis:
+
 #Sekcja Początkowa: Narzędzia i ustawienia
 * import ...: Na samym początku sprowadzamy do programu trzy "skrzynki z narzędziami". turtle posłuży nam do rysowania grafiki, time do kontrolowania prędkości gry, a random do losowania pozycji jedzenia.
 * Zmienne początkowe: opoznienie = 0.1 to pauza między każdą "klatką" gry. Dzięki temu wąż porusza się w tempie, które pozwala graczowi zareagować (inaczej latałby z prędkością światła).
+ 
 ##🖥️ Krok 1: Przygotowanie planszy
 * Tworzymy okno gry (okno), nadajemy mu czarne tło i rozmiar 600x600 pikseli.
 * okno.tracer(0): To bardzo ważna funkcja! Wyłącza ona pokazywanie żmudnego procesu rysowania figur przez system. Dzięki temu gra nie pokazuje, jak kwadracik powoli przesuwa się po ekranie, tylko "teleportuje" go na nowe miejsce, tworząc złudzenie płynnego skoku na kolejną kratkę.
+  
 ##🐍 Krok 2 i 3: Aktorzy (Wąż i Jedzenie)
 * Głowa: Tworzymy obiekt (tzw. "żółwia"), nadajemy mu kształt kwadratu, kolor zielony i ustawiamy na samym środku ekranu – czyli na współrzędnych X=0, Y=0. Podnosimy też pisak (penup()), żeby wąż nie zostawiał za sobą kreski jak flamaster. Nadajemy mu początkowy stan: kierunek = "stop", więc wąż czeka na ruch gracza.
 * Jedzenie: Robimy dokładnie to samo, co przy głowie, ale zmieniamy kształt na kółko, kolor na czerwony i przesuwamy nieco wyżej (X=0, Y=100), żeby wąż nie zjadł go od razu na starcie.
 * cialo = []: To jest serce mechaniki wzrostu. Tworzymy pustą listę (taki "worek"), do której będziemy wrzucać kolejne kwadraciki, gdy wąż zje jabłko.
+  
 ##🕹️ Krok 4: System poruszania się
 * Funkcje zmiany kierunku: Napisałeś cztery małe funkcje (w_gore, w_dol, itd.). Zauważ, że mają one wbudowane zabezpieczenie – wąż idący w górę nie może nagle pójść w dół (nie może wejść sam w siebie). Zmieniają one tylko "stan umysłu" węża (czyli zmienną kierunek).
 * Funkcja ruch(): To tutaj dzieje się fizyczne przesunięcie. Program sprawdza, w jakim kierunku patrzy głowa. Jeśli w górę, bierze jej obecną pozycję Y, dodaje do niej 20 pikseli (tyle szerokości ma nasz kwadrat) i ustawia głowę w nowym miejscu.
 ##⌨️ Krok 5: Klawiatura
 * okno.listen() każe programowi nadstawić uszu na to, co robisz na klawiaturze. Przypisujemy strzałki na klawiaturze ("Up", "Down" itd.) do funkcji z Kroku 4. Zatem wciśnięcie strzałki w górę wywołuje funkcję w_gore.
+  
 ##🔄 Krok 6: Główna pętla gry (Silnik)
 To jest kod zamknięty w while True:. Kręci się on w kółko bez przerwy aż do wyłączenia programu. To tutaj tętni życie gry.
 1. Odświeżenie ekranu (okno.update()): Ponieważ na początku wyłączyliśmy automatyczne odświeżanie (tracer(0)), teraz musimy ręcznie co ułamek sekundy mówić systemowi: "pokaż graczowi, co narysowałem".
